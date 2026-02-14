@@ -212,17 +212,19 @@ p {
 }
 
 .step-content {
-    max-height: 0;
-    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    height: 0;
+    overflow: visible;
     opacity: 0;
-    transition: opacity 0.3s ease, max-height 0s 0.3s;
+    transition: opacity 0.3s ease;
 }
 
 .step-content.active {
-    max-height: none;
+    visibility: visible;
+    height: auto;
     opacity: 1;
-    overflow: visible;
-    transition: opacity 0.3s ease, max-height 0s 0s;
+    transition: opacity 0.3s ease;
     animation: slideIn 0.4s ease;
 }
 
@@ -758,9 +760,10 @@ input:checked + .slider::before {
 }
 
 .step-indicator {
-    position: absolute;
+    position: fixed;
     left: -9999px;
     top: 0;
+    z-index: 9999;
 }
 
 /* ========================================
