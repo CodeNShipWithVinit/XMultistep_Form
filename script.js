@@ -68,6 +68,7 @@ function showError(inputElement, errorElementId, message) {
     inputElement.classList.add('error');
     errorElement.textContent = message;
     errorElement.classList.add('show');
+    inputElement.setCustomValidity(message);
 }
 
 function clearError(inputElement, errorElementId) {
@@ -75,6 +76,7 @@ function clearError(inputElement, errorElementId) {
     inputElement.classList.remove('error');
     errorElement.textContent = '';
     errorElement.classList.remove('show');
+    inputElement.setCustomValidity('');
 }
 
 function validateStep1() {
@@ -189,13 +191,15 @@ function goToNextStep() {
         return;
     }
 
-    if (canProceed && formState.currentStep < 4) {
-        formState.currentStep++;
-        showStep(formState.currentStep);
+    if (canProceed) {
+        if (formState.currentStep < 4) {
+            formState.currentStep++;
+            showStep(formState.currentStep);
 
-        // Update summary if moving to step 4
-        if (formState.currentStep === 4) {
-            updateSummary();
+            // Update summary if moving to step 4
+            if (formState.currentStep === 4) {
+                updateSummary();
+            }
         }
     }
 }

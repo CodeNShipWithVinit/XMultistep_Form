@@ -208,15 +208,22 @@ p {
     flex: 1;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .step-content {
-    display: none;
-    animation: slideIn 0.4s ease;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, max-height 0s 0.3s;
 }
 
 .step-content.active {
-    display: block;
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    transition: opacity 0.3s ease, max-height 0s 0s;
+    animation: slideIn 0.4s ease;
 }
 
 @keyframes slideIn {
@@ -694,6 +701,8 @@ input:checked + .slider::before {
     align-items: center;
     margin-top: auto;
     padding-top: 2rem;
+    position: relative;
+    z-index: 10;
 }
 
 .btn-back,
@@ -750,14 +759,8 @@ input:checked + .slider::before {
 
 .step-indicator {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+    left: -9999px;
+    top: 0;
 }
 
 /* ========================================
