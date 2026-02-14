@@ -215,16 +215,16 @@ p {
     display: block;
     visibility: hidden;
     height: 0;
-    overflow: visible;
+    position: relative;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
 .step-content.active {
     visibility: visible;
     height: auto;
     opacity: 1;
-    transition: opacity 0.3s ease;
+    pointer-events: auto;
     animation: slideIn 0.4s ease;
 }
 
@@ -760,10 +760,13 @@ input:checked + .slider::before {
 }
 
 .step-indicator {
-    position: fixed;
-    left: -9999px;
-    top: 0;
-    z-index: 9999;
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--purplish-blue);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
 }
 
 /* ========================================
