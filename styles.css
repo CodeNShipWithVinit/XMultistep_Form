@@ -92,7 +92,8 @@ p {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
     display: flex;
     min-height: 600px;
-    overflow: hidden;
+    overflow-x: visible;
+    overflow-y: hidden;
     animation: fadeInUp 0.6s ease;
 }
 
