@@ -112,7 +112,7 @@ p {
    ======================================== */
 
 .steps-sidebar {
-    background: url('bg-sidebar-desktop.svg');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 274 568"><rect fill="%23483eff" width="274" height="568" rx="10"/></svg>');
     background-size: cover;
     background-position: center;
     padding: var(--spacing-xl);
@@ -748,6 +748,18 @@ input:checked + .slider::before {
     display: none !important;
 }
 
+.step-indicator {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* ========================================
    Responsive Design
    ======================================== */
@@ -792,7 +804,7 @@ input:checked + .slider::before {
         left: 0;
         right: 0;
         height: 120px;
-        background: url('bg-sidebar-mobile.svg') no-repeat bottom;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 375 120"><path fill="%23ff9f7e" opacity="0.3" d="M0 0c50 30 100 50 150 40s100-40 150-20c30 12 50 30 75 50v50H0z"/><path fill="%23f98e8e" opacity="0.4" d="M0 20c60 20 120 40 180 30s120-30 195-10v80H0z"/></svg>') no-repeat bottom;
         background-size: cover;
         pointer-events: none;
     }

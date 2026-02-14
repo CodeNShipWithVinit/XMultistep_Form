@@ -283,23 +283,6 @@ function toggleBilling() {
 // Step 3: Add-ons Selection
 // ========================================
 
-function toggleAddon(addonName) {
-    const addonCard = document.querySelector(`.addon_card[data-addon="${addonName}"]`);
-    const checkbox = addonCard.querySelector('.addon-checkbox');
-
-    if (formState.selectedAddons.includes(addonName)) {
-        // Remove addon
-        formState.selectedAddons = formState.selectedAddons.filter(name => name !== addonName);
-        addonCard.classList.remove('selected');
-        checkbox.checked = false;
-    } else {
-        // Add addon
-        formState.selectedAddons.push(addonName);
-        addonCard.classList.add('selected');
-        checkbox.checked = true;
-    }
-}
-
 function updateAddonPrices() {
     addonCards.forEach(card => {
         const priceElement = card.querySelector('.addon-price');
@@ -412,28 +395,33 @@ billingOptions.forEach(option => {
 
 // Step 3: Add-ons selection
 addonCards.forEach(card => {
+    const checkbox = card.querySelector('.addon-checkbox');
+    const addonName = card.getAttribute('data-addon');
+    
+    // Handle card click
     card.addEventListener('click', (e) => {
-        // Prevent double toggle if clicking directly on checkbox or label
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'LABEL') {
+        // If clicking on checkbox or label, let the default behavior handle it
+        if (e.target === checkbox || e.target.closest('label')) {
             return;
         }
         
-        const addonName = card.getAttribute('data-addon');
-        toggleAddon(addonName);
+        // Otherwise, toggle the checkbox programmatically
+        checkbox.checked = !checkbox.checked;
+        
+        // Trigger change event
+        const event = new Event('change', { bubbles: true });
+        checkbox.dispatchEvent(event);
     });
     
-    // Also handle checkbox change event
-    const checkbox = card.querySelector('.addon-checkbox');
-    checkbox.addEventListener('change', (e) => {
-        e.stopPropagation();
-        const addonName = card.getAttribute('data-addon');
+    // Handle checkbox change
+    checkbox.addEventListener('change', () => {
         const isChecked = checkbox.checked;
         
         if (isChecked) {
             if (!formState.selectedAddons.includes(addonName)) {
                 formState.selectedAddons.push(addonName);
-                card.classList.add('selected');
             }
+            card.classList.add('selected');
         } else {
             formState.selectedAddons = formState.selectedAddons.filter(name => name !== addonName);
             card.classList.remove('selected');
